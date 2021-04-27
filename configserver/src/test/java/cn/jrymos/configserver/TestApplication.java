@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.env.PropertiesPropertySourceLoader;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.FileSystemResource;
@@ -24,7 +26,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 
-
+@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.REGEX, pattern = "cn.jrymos.configserver.spi.*")})
 @SpringBootApplication
 @EnableConfigServer
 @EnableDiscoveryClient
@@ -39,7 +41,7 @@ public class TestApplication implements InitializingBean {
     }
 
     public static void copyConfigExtensionFiles() throws IOException, URISyntaxException {
-        Path path = Paths.get(System.getProperty("user.dir"), "src/main/resources");
+        Path path = Paths.get(System.getProperty("user.dir"), "configserver/src/main/resources");
         List<PropertySource<?>> propertySources = new PropertiesPropertySourceLoader().load("main", new FileSystemResource(path + "/application.properties"));
         String basePath = propertySources.stream().map(PropertySource::getSource)
             .filter(source -> source instanceof Map)
