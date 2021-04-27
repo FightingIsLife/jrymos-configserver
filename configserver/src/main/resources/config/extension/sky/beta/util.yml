@@ -1,0 +1,6 @@
+sensitive-word:
+  sex-list: ["强奸"]
+  advertisement-list: ["兼职", "招聘"]
+  politics-list: ["习近平"]
+  violence-list: ["出售美军现役军刀"]
+  default-list: ["英语的网红App"]

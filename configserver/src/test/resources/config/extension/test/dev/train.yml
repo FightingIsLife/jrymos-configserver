@@ -1,0 +1,6 @@
+test: a hello
+table:
+    -
+        title: other-test1
+    -
+        title: other-ttest2
