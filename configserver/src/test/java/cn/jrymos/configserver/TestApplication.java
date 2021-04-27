@@ -40,6 +40,7 @@ public class TestApplication implements InitializingBean {
         SpringApplication.run(TestApplication.class, args);
     }
 
+    //拷贝configserver/src/main/resources/config/extension 到test resources
     public static void copyConfigExtensionFiles() throws IOException, URISyntaxException {
         Path path = Paths.get(System.getProperty("user.dir"), "configserver/src/main/resources");
         List<PropertySource<?>> propertySources = new PropertiesPropertySourceLoader().load("main", new FileSystemResource(path + "/application.properties"));
